@@ -1,0 +1,218 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import ServiceCard from '@/components/ServiceCard.astro';
+import ReviewsSlider from '@/components/ReviewsSlider.astro';
+import { getCollection } from 'astro:content';
+import { siteConfig } from '@/data/siteConfig';
+import { Wrench, ShieldCheck, Cpu, Clock, CheckCircle2, Phone, MapPin, Award, ArrowRight } from 'lucide-astro';
+
+const allServices = await getCollection('services');
+const featuredServices = allServices.filter(s => s.data.featured).slice(0, 6);
+
+const brandList = [
+  { name: 'Bosch', slug: 'remont-forsunok-bosch', desc: 'Авторизованный стенд, прописка кодов IMA', image: '/images/services/logo_bosch-sm.webp' },
+  { name: 'Denso', slug: 'remont-forsunok-denso', desc: 'Восстановление распылителей и QR-кодирование', image: '/images/services/logo_denso-sm.webp' },
+  { name: 'Delphi', slug: 'remont-forsunok-delphi', desc: 'Замена мультипликаторов C2I/C3I', image: '/images/services/logo_delphi-sm.webp' },
+  { name: 'Continental / Siemens', slug: 'remont-forsunok-continental-siemens', desc: 'Настройка пьезоэлементов VDO', image: '/images/services/logo_siemens-sm.webp' },
+];
+
+const faqList = [
+  {
+    question: 'Сколько времени занимает диагностика и ремонт форсунок?',
+    answer: 'Стендовая проверка форсунок занимает 20-30 минут. Капитальный ремонт форсунок Common Rail выполняется в течение 2-4 часов при наличии оригинальных комплектующих.'
+  },
+  {
+    question: 'Какую гарантию вы предоставляете на выполненные работы?',
+    answer: 'Мы даем гарантию 12 месяцев или 20 000 км пробега на все восстановленные форсунки, ТНВД и замененные запчасти.'
+  },
+  {
+    question: 'Вы выдаете распечатку тест-плана проверки на стенде?',
+    answer: 'Да, после стендовой проверки форсунки на компьютеризированном стенде вы получаете официальный распечатанный тест-план с параметрами налива, обратки и давления.'
+  },
+  {
+    question: 'Присваиваете ли вы новые коды после ремонта форсунок?',
+    answer: 'Обязательно. Мы генерируем новые коды коррекции (IMA / QR для Denso, C2I/C3I для Delphi, Bosch) для правильной работы ЭБУ двигателя.'
+  }
+];
+---
+
+<Layout showContactWidget={false} title={siteConfig.title} description={siteConfig.description} type="home" faq={faqList}>
+  <!-- Hero Section -->
+  <section class="relative bg-dark-950 overflow-hidden pt-12 pb-20 border-b border-slate-800">
+    <img
+      src="/images/hero/hero-desktop.webp"
+      srcset="/images/hero/hero-mobile.webp 800w, /images/hero/hero-desktop.webp 1920w"
+      sizes="100vw"
+      alt="Ремонт форсунок и ТНВД в Минске"
+      width="1920"
+      height="1080"
+      fetchpriority="high"
+      loading="eager"
+      class="absolute inset-0 w-full h-full object-cover opacity-20 z-0"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-dark-950 via-dark-950/90 to-dark-950/70 z-0"></div>
+
+    <div class="max-w-7xl mx-auto px-4 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-7">
+        <div class="inline-flex items-center space-x-2 bg-primary-500/10 border border-primary-500/30 text-primary-400 font-semibold text-xs px-3.5 py-1.5 rounded-full mb-6 uppercase tracking-wider">
+          <Award class="w-4 h-4 text-primary-500" />
+          <span>Специализированный дизельный сервис в Минске</span>
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl font-black text-white leading-tight tracking-tight mb-6">
+          Ремонт дизельных и бензиновых <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-accent-400">форсунок и ТНВД</span> в Минске
+        </h1>
+
+        <p class="text-slate-300 text-base sm:text-lg leading-relaxed mb-8 max-w-2xl">
+          Стендовая проверка, капитальное восстановление, прописка кодов и ультразвуковая чистка топливной аппаратуры <strong class="text-white">Bosch, Denso, Delphi, Continental (Siemens)</strong> с официальной гарантией 12 месяцев.
+        </p>
+
+        <!-- Triggers -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8 text-xs font-medium text-slate-300">
+          <div class="flex items-center space-x-2 bg-dark-900/80 p-3 rounded-xl border border-slate-800">
+            <CheckCircle2 class="w-4 h-4 text-emerald-400 shrink-0" />
+            <span>Гарантия 12 месяцев</span>
+          </div>
+          <div class="flex items-center space-x-2 bg-dark-900/80 p-3 rounded-xl border border-slate-800">
+            <Clock class="w-4 h-4 text-accent-500 shrink-0" />
+            <span>Проверка за 20 минут</span>
+          </div>
+          <div class="flex items-center space-x-2 bg-dark-900/80 p-3 rounded-xl border border-slate-800 col-span-2 sm:col-span-1">
+            <Cpu class="w-4 h-4 text-primary-500 shrink-0" />
+            <span>Стенды EPS & Hartridge</span>
+          </div>
+        </div>
+
+        <!-- Call Action -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
+          <a href={`tel:${siteConfig.phoneClean}`} class="bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-accent-500 text-slate-950 font-black px-6 py-4 rounded-xl text-sm uppercase tracking-wider text-center shadow-lg shadow-primary-600/30 transition transform hover:-translate-y-0.5">
+            Записаться на диагностику
+          </a>
+          <a href="/uslugi" class="bg-slate-800 hover:bg-slate-700 text-white font-bold px-6 py-4 rounded-xl text-sm text-center border border-slate-700 transition">
+            Смотреть все услуги
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Card Quick Phone -->
+      <div class="lg:col-span-5 bg-dark-900/90 backdrop-blur border border-slate-800 p-6 rounded-3xl shadow-2xl">
+        <h3 class="text-lg font-bold text-white mb-2">Консультация с инженером</h3>
+        <p class="text-xs text-slate-400 mb-6">Опишите симптомы (дымность, трудный запуск, плавание оборотов) — рассчитаем стоимость за 3 минуты.</p>
+        
+        <div class="space-y-4 mb-6">
+          <a href={`tel:${siteConfig.phoneClean}`} class="flex items-center space-x-3 p-3.5 bg-dark-950 rounded-xl border border-slate-800 hover:border-primary-500/50 transition">
+            <div class="w-10 h-10 rounded-lg bg-primary-500/20 text-primary-500 flex items-center justify-center shrink-0">
+              <Phone class="w-5 h-5" />
+            </div>
+            <div>
+              <span class="text-xs text-slate-400 block">Отдел приёмки:</span>
+              <span class="text-base font-bold text-white">{siteConfig.phonePrimary}</span>
+            </div>
+          </a>
+
+          <div class="flex items-center space-x-3 p-3.5 bg-dark-950 rounded-xl border border-slate-800">
+            <div class="w-10 h-10 rounded-lg bg-accent-500/20 text-accent-500 flex items-center justify-center shrink-0">
+              <MapPin class="w-5 h-5" />
+            </div>
+            <div>
+              <span class="text-xs text-slate-400 block">Адрес СТО:</span>
+              <span class="text-xs font-semibold text-slate-200">{siteConfig.address.full}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-[11px] text-slate-500 text-center">
+          Работаем с физлицами и безналичным расчетом с НДС для юрлиц.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Services (6 Cards) Section -->
+  <section class="py-16 bg-dark-950">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-primary-500 block mb-2">Наши основные направления</span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-white">Ключевые услуги по ремонту топливной системы</h2>
+        </div>
+        <a href="/uslugi" class="mt-4 md:mt-0 text-sm font-bold text-primary-400 hover:text-primary-300 flex items-center space-x-1">
+          <span>Каталог всех 14 услуг</span>
+          <ArrowRight class="w-4 h-4" />
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {featuredServices.map(service => (
+          <ServiceCard 
+            title={service.data.title}
+            description={service.data.description}
+            slug={service.slug}
+            image={service.data.image}
+            priceFrom={service.data.priceFrom}
+            executionTime={service.data.executionTime}
+            category={service.data.category}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Brands Cross-linking Section -->
+  <section class="py-16 bg-dark-900 border-y border-slate-800">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-accent-500 block mb-2">Производители</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Ремонт форсунок по производителям</h2>
+        <p class="text-xs sm:text-sm text-slate-400 mt-2">Используем оригинальные технологические карты и высокоточные стенды кодирования.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {brandList.map(brand => (
+          <a href={`/uslugi/${brand.slug}`} class="bg-dark-950 p-6 rounded-2xl border border-slate-800 hover:border-primary-500/50 transition group">
+            <div class="h-36 w-full rounded-xl bg-slate-900/90 border border-slate-800 p-3 flex items-center justify-center mb-4 group-hover:border-primary-500/50 transition">
+              <img src={brand.image} alt={brand.name} width="200" height="140" loading="lazy" class="w-full h-full object-contain filter brightness-110 group-hover:scale-105 transition duration-300" />
+            </div>
+            <h3 class="text-lg font-bold text-white group-hover:text-primary-400 transition mb-2">
+              {brand.name}
+            </h3>
+            <p class="text-xs text-slate-400 mb-4 leading-relaxed">
+              {brand.desc}
+            </p>
+            <span class="text-xs font-bold text-primary-500 flex items-center space-x-1 group-hover:translate-x-1 transition">
+              <span>Подробнее</span>
+              <span>→</span>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Slider Section -->
+  <ReviewsSlider />
+
+  <!-- FAQ Section -->
+  <section class="py-16 bg-dark-950">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="text-center mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-primary-500 block mb-2">Вопросы и ответы</span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Часто задаваемые вопросы по ремонту</h2>
+      </div>
+
+      <div class="space-y-4">
+        {faqList.map(item => (
+          <details class="bg-dark-900 border border-slate-800 rounded-2xl p-5 group cursor-pointer">
+            <summary class="font-bold text-white text-base flex justify-between items-center list-none">
+              <span>{item.question}</span>
+              <span class="text-primary-500 transition group-open:rotate-180">▼</span>
+            </summary>
+            <p class="text-xs sm:text-sm text-slate-300 mt-4 leading-relaxed border-t border-slate-800/80 pt-3">
+              {item.answer}
+            </p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

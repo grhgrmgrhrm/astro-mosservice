@@ -1,0 +1,150 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import ServiceCard from '@/components/ServiceCard.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
+import { siteConfig } from '@/data/siteConfig';
+
+const allServices = await getCollection('services');
+
+// User Priority Sorting Rule:
+// 1. Ремонт форсунок
+// 2. Ремонт ТНВД
+// 3. Ремонт дизельных форсунок
+// 4. Common Rail
+// 5. Остальные
+function getPriorityScore(slug: string, title: string): number {
+  const lowerTitle = title.toLowerCase();
+  
+  if (slug.startsWith('remont-forsunok-')) return 1;
+  if (slug === 'remont-tnvd' || lowerTitle.includes('тнвд')) return 2;
+  if (slug === 'remont-dizelnyh-forsunok-common-rail') return 3;
+  if (lowerTitle.includes('common rail')) return 4;
+  return 5;
+}
+
+const prioritySlugs = [
+  'remont-forsunok-bosch',
+  'remont-forsunok-denso',
+  'remont-forsunok-delphi',
+  'remont-forsunok-continental-siemens',
+  'remont-tnvd',
+  'remont-dizelnyh-forsunok-common-rail',
+  'diagnostika-i-remont-dizelnoj-apparatury-common-rail',
+  'zamena-datchikov-i-regulyatorov-davleniya'
+];
+
+allServices.sort((a, b) => {
+  const scoreA = getPriorityScore(a.slug, a.data.title);
+  const scoreB = getPriorityScore(b.slug, b.data.title);
+
+  if (scoreA !== scoreB) {
+    return scoreA - scoreB;
+  }
+
+  const idxA = prioritySlugs.indexOf(a.slug);
+  const idxB = prioritySlugs.indexOf(b.slug);
+  if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+  if (idxA !== -1) return -1;
+  if (idxB !== -1) return 1;
+
+  return a.data.title.localeCompare(b.data.title, 'ru');
+});
+
+const categories = [
+  { id: 'all', label: 'Все 14 услуг' },
+  { id: 'brands', label: 'По брендам' },
+  { id: 'tnvd', label: 'ТНВД' },
+  { id: 'common-rail', label: 'Common Rail' },
+  { id: 'gasoline', label: 'Бензиновые' },
+  { id: 'diagnostics', label: 'Диагностика' },
+  { id: 'commercial', label: 'Коммерческий авто' },
+];
+---
+
+<Layout 
+  showContactWidget={true}
+  title="Все услуги по ремонту форсунок и ТНВД в Минске | МосСервис" 
+  description="Каталог услуг СТО МосСервис в Минске: ремонт дизельных форсунок Common Rail, чистка бензиновых форсунок, диагностика ТНВД, замена датчиков. Гарантия 12 месяцев."
+>
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <Breadcrumbs items={[{ label: 'Услуги и цены' }]} />
+
+    <div class="mb-10">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+        Услуги по ремонту и диагностике топливной системы
+      </h1>
+      <p class="text-slate-300 text-sm sm:text-base max-w-3xl leading-relaxed">
+        Полный спектр работ по диагностике, ультразвуковой чистке, ремонту и настройке форсунок и топливных насосов высокого давления в Минске. Выберите интересующую категорию для фильтрации.
+      </p>
+    </div>
+
+    <!-- Category Filter Bar (Interactive) -->
+    <div class="flex items-center space-x-2 overflow-x-auto pb-4 mb-8 text-xs font-semibold" id="category-filter-bar">
+      {categories.map((cat, idx) => (
+        <button 
+          data-filter={cat.id}
+          class={`px-4 py-2.5 rounded-xl border transition-all duration-200 whitespace-nowrap ${idx === 0 ? 'bg-primary-500 text-slate-950 border-primary-500 font-bold' : 'bg-dark-900 text-slate-300 border-slate-800 hover:border-primary-500/60'}`}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+
+    <!-- Services Grid (Custom Priority Sorted) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="services-grid">
+      {allServices.map(service => (
+        <div data-service-card data-category={service.data.category} class="flex flex-col h-full">
+          <ServiceCard 
+            title={service.data.title}
+            description={service.data.description}
+            slug={service.slug}
+            image={service.data.image}
+            priceFrom={service.data.priceFrom}
+            executionTime={service.data.executionTime}
+            category={service.data.category}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</Layout>
+
+<script>
+  function setupCategoryFilter() {
+    const filterBtns = document.querySelectorAll('[data-filter]');
+    const cards = document.querySelectorAll('[data-service-card]');
+
+    if (!filterBtns.length || !cards.length) return;
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+
+        // Update active button styles
+        filterBtns.forEach(b => {
+          if (b === btn) {
+            b.classList.add('bg-primary-500', 'text-slate-950', 'border-primary-500', 'font-bold');
+            b.classList.remove('bg-dark-900', 'text-slate-300', 'border-slate-800');
+          } else {
+            b.classList.remove('bg-primary-500', 'text-slate-950', 'border-primary-500', 'font-bold');
+            b.classList.add('bg-dark-900', 'text-slate-300', 'border-slate-800');
+          }
+        });
+
+        // Filter service cards
+        cards.forEach(card => {
+          const cardCat = card.getAttribute('data-category');
+          if (filter === 'all' || cardCat === filter) {
+            (card as HTMLElement).style.display = 'flex';
+          } else {
+            (card as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  setupCategoryFilter();
+  document.addEventListener('astro:page-load', setupCategoryFilter);
+</script>

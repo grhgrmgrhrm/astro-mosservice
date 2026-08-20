@@ -1,0 +1,94 @@
+---
+import { siteConfig } from '@/data/siteConfig';
+import ContactWidget from '@/components/ContactWidget.astro';
+import { Wrench, MapPin, Phone, Mail, ShieldCheck } from 'lucide-astro';
+
+interface Props {
+  showContactWidget?: boolean;
+}
+
+const { showContactWidget = false } = Astro.props;
+---
+
+{showContactWidget && (
+  <div class="w-full">
+    <ContactWidget />
+  </div>
+)}
+
+<footer class="bg-dark-950 text-slate-400 border-t border-slate-800 text-sm">
+  <div class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+    
+    <!-- Col 1: About -->
+    <div>
+      <div class="flex items-center space-x-3 mb-4">
+        <div class="w-8 h-8 rounded-lg bg-primary-500 text-slate-950 flex items-center justify-center font-bold">
+          <Wrench class="w-5 h-5" />
+        </div>
+        <span class="text-lg font-bold text-white">
+          МОС<span class="text-primary-500">СЕРВИС</span>
+        </span>
+      </div>
+      <p class="text-xs text-slate-400 leading-relaxed mb-4">
+        Специализированный автосервис по восстановлению, настройке и стендовой диагностике топливных систем Common Rail и ТНВД в Минске.
+      </p>
+      <div class="flex items-center space-x-2 text-xs text-emerald-400 font-medium">
+        <ShieldCheck class="w-4 h-4" />
+        <span>Гарантия 12 месяцев</span>
+      </div>
+    </div>
+
+    <!-- Col 2: Services -->
+    <div>
+      <h3 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Популярные услуги</h3>
+      <ul class="space-y-2 text-xs">
+        <li><a href="/uslugi/remont-dizelnyh-forsunok-common-rail" class="hover:text-primary-500 transition">Ремонт форсунок Common Rail</a></li>
+        <li><a href="/uslugi/chistka-i-proverka-benzinovyh-forsunok" class="hover:text-primary-500 transition">Чистка бензиновых форсунок</a></li>
+        <li><a href="/uslugi/remont-tnvd" class="hover:text-primary-500 transition">Ремонт ТНВД</a></li>
+        <li><a href="/uslugi/kompyuternaya-diagnostika" class="hover:text-primary-500 transition">Компьютерная диагностика</a></li>
+        <li><a href="/uslugi/stendovaya-proverka-forsunok" class="hover:text-primary-500 transition">Стендовая проверка</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 3: Brands -->
+    <div>
+      <h3 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Ремонт по брендам</h3>
+      <ul class="space-y-2 text-xs">
+        <li><a href="/uslugi/remont-forsunok-bosch" class="hover:text-primary-500 transition">Форсунки Bosch</a></li>
+        <li><a href="/uslugi/remont-forsunok-denso" class="hover:text-primary-500 transition">Форсунки Denso</a></li>
+        <li><a href="/uslugi/remont-forsunok-delphi" class="hover:text-primary-500 transition">Форсунки Delphi</a></li>
+        <li><a href="/uslugi/remont-forsunok-continental-siemens" class="hover:text-primary-500 transition">Continental / Siemens</a></li>
+        <li><a href="/uslugi/remont-toplivnoj-apparatury-mikroavtobusov" class="hover:text-primary-500 transition">Коммерческий транспорт</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 4: Contacts -->
+    <div>
+      <h3 class="text-white font-semibold mb-4 text-sm uppercase tracking-wider">Контакты</h3>
+      <ul class="space-y-3 text-xs">
+        <li class="flex items-start space-x-2">
+          <MapPin class="w-4 h-4 text-primary-500 shrink-0 mt-0.5" />
+          <a href={siteConfig.maps.yandex} target="_blank" rel="noopener noreferrer" class="hover:text-primary-500 transition">{siteConfig.address.full}</a>
+        </li>
+        <li class="flex items-center space-x-2">
+          <Phone class="w-4 h-4 text-primary-500 shrink-0" />
+          <a href={`tel:${siteConfig.phoneClean}`} class="text-white font-bold hover:text-primary-500 transition">{siteConfig.phonePrimary}</a>
+        </li>
+        <li class="flex items-center space-x-2">
+          <Mail class="w-4 h-4 text-primary-500 shrink-0" />
+          <span>{siteConfig.email}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bg-dark-900 border-t border-slate-800/80 py-4 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div>© {new Date().getFullYear()} {siteConfig.name}. Все права защищены. Минск, Беларусь.</div>
+      <div class="flex space-x-4">
+        <a href="/uslugi" class="hover:text-slate-300 transition">Карта услуг</a>
+        <a href="/faq" class="hover:text-slate-300 transition">FAQ (Частые вопросы)</a>
+        </div>
+    </div>
+  </div>
+</footer>

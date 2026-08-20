@@ -1,0 +1,107 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import InternalLinks from '@/components/InternalLinks.astro';
+import { getCollection } from 'astro:content';
+import { siteConfig } from '@/data/siteConfig';
+import { Clock, ShieldCheck, Phone, Check, Wrench, Tag } from 'lucide-astro';
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+  return services.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const { title, metaTitle, description, image, priceFrom, executionTime, category, relatedServices } = entry.data;
+
+// Конвертируем путь к картинке в full-версию (800x500) для страницы услуги
+const fullImage = image.replace(/\.webp$/, '-full.webp');
+---
+
+<Layout 
+  title={metaTitle || `${title} в Минске | МосСервис`}
+  description={description}
+  image={image}
+  type="service"
+  slug={entry.slug}
+  priceFrom={priceFrom}
+>
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <Breadcrumbs items={[
+      { label: 'Услуги', href: '/uslugi' },
+      { label: title }
+    ]} />
+
+    <!-- Service Header Banner -->
+    <div class="relative bg-dark-900 rounded-3xl overflow-hidden border border-slate-800 p-6 sm:p-10 mb-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7">
+          <div class="inline-flex items-center space-x-2 bg-primary-500/10 border border-primary-500/30 text-primary-400 font-semibold text-xs px-3 py-1 rounded-md mb-4 uppercase tracking-wider">
+            <span>Гарантия 12 месяцев</span>
+          </div>
+
+          <h1 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight mb-4">
+            {title} в Минске
+          </h1>
+
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+            {description}
+          </p>
+
+          <!-- Specifications Badge -->
+          <div class="flex flex-wrap gap-4 mb-6 text-xs text-slate-200">
+            <div class="flex items-center space-x-2 bg-dark-950 px-3.5 py-2 rounded-xl border border-slate-800">
+              <Tag class="w-4 h-4 text-emerald-400" />
+              <span>Стоимость: <strong class="text-emerald-400 font-bold">{priceFrom}</strong></span>
+            </div>
+            <div class="flex items-center space-x-2 bg-dark-950 px-3.5 py-2 rounded-xl border border-slate-800">
+              <Clock class="w-4 h-4 text-accent-500" />
+              <span>Сроки ремонта: <strong class="text-white font-bold">{executionTime}</strong></span>
+            </div>
+          </div>
+
+          <a href={`tel:${siteConfig.phoneClean}`} class="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-accent-500 text-slate-950 font-bold px-6 py-3.5 rounded-xl text-xs uppercase tracking-wider shadow-lg shadow-primary-600/20 transition">
+            <Phone class="w-4 h-4" />
+            <span>Записаться на ремонт / диагностику</span>
+          </a>
+        </div>
+
+        <div class="lg:col-span-5 relative rounded-2xl overflow-hidden shadow-2xl border border-slate-800 max-h-80">
+          <img src={fullImage} alt={title} width="800" height="500" class="w-full h-full object-cover" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <!-- Article Content -->
+      <div class="lg:col-span-8 prose prose-invert max-w-none prose-headings:font-bold prose-headings:text-white prose-p:text-slate-300 prose-p:leading-relaxed prose-li:text-slate-300">
+        <Content />
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="lg:col-span-4 space-y-6">
+        <!-- Call Box -->
+        <div class="bg-dark-900 p-6 rounded-2xl border border-slate-800 sticky top-24">
+          <h3 class="text-base font-bold text-white mb-2">Нужен ремонт или консультация?</h3>
+          <p class="text-xs text-slate-400 mb-4 leading-relaxed">Позвоните нашему мастеру-приемщику для записи на диагностику без очереди.</p>
+
+          <a href={`tel:${siteConfig.phoneClean}`} class="block w-full bg-primary-500 hover:bg-primary-400 text-slate-950 font-bold py-3 text-center rounded-xl text-sm transition mb-3">
+            {siteConfig.phonePrimary}
+          </a>
+
+          <div class="text-[11px] text-slate-500 text-center">
+            Ежедневно: 08:00 - 20:00. Минск, Передовая ул., 6, корп. 12
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Internal Cross Links -->
+    <InternalLinks currentSlug={entry.slug} relatedSlugs={relatedServices} />
+  </div>
+</Layout>

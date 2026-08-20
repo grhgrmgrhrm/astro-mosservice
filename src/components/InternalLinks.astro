@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import { ArrowRight, Wrench, Shield } from 'lucide-astro';
+
+interface Props {
+  currentSlug?: string;
+  relatedSlugs?: string[];
+}
+
+const { currentSlug, relatedSlugs = [] } = Astro.props;
+const allServices = await getCollection('services');
+
+let items = allServices.filter(s => s.slug !== currentSlug);
+
+if (relatedSlugs.length > 0) {
+  const matched = items.filter(s => relatedSlugs.includes(s.slug));
+  if (matched.length >= 3) {
+    items = matched;
+  }
+}
+
+items = items.slice(0, 4);
+---
+
+<section class="mt-12 pt-8 border-t border-slate-800">
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h2 class="text-xl font-bold text-white flex items-center space-x-2">
+        <Wrench class="w-5 h-5 text-primary-500" />
+        <span>Рекомендуемые услуги и смежные работы</span>
+      </h2>
+      <p class="text-xs text-slate-400 mt-1">Комплексный подход к ремонту топливной системы дизеля и бензина</p>
+    </div>
+    <a href="/uslugi" class="text-xs text-primary-500 hover:underline hidden sm:flex items-center space-x-1">
+      <span>Все 14 услуг</span>
+      <ArrowRight class="w-3 h-3" />
+    </a>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    {items.map(item => (
+      <a href={`/uslugi/${item.slug}`} class="bg-dark-900 p-4 rounded-xl border border-slate-800 hover:border-primary-500/50 transition group flex flex-col justify-between">
+        <div>
+          <span class="text-[10px] text-primary-400 font-bold uppercase tracking-wider block mb-1">СТО МосСервис</span>
+          <h3 class="text-sm font-semibold text-white group-hover:text-primary-400 transition leading-snug line-clamp-2 mb-2">
+            {item.data.title}
+          </h3>
+        </div>
+        <div class="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-slate-800/60 mt-3">
+          <span class="text-emerald-400 font-semibold">{item.data.priceFrom}</span>
+          <span class="group-hover:translate-x-1 transition text-primary-500 font-bold">→</span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>

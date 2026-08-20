@@ -1,0 +1,67 @@
+---
+// Яндекс.Метрика: замените YANDEX_METRIKA_ID на реальный номер счётчика.
+// Создать счётчик: https://metrika.yandex.ru/list → Добавить счётчик.
+// Цели (настройте в интерфейсе Метрики или используйте reachGoal ниже):
+//   - click_phone: клик по номеру телефона
+//   - click_messenger: клик по мессенджеру (Viber/Telegram/WhatsApp)
+//   - click_map: клик по карте/маршруту
+const YANDEX_METRIKA_ID = 'YANDEX_METRIKA_ID'; // TODO: вставить реальный ID
+const isEnabled = YANDEX_METRIKA_ID !== 'YANDEX_METRIKA_ID';
+---
+
+{isEnabled && (
+  <script is:inline define:vars={{ YANDEX_METRIKA_ID }}>
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(YANDEX_METRIKA_ID, "init", {
+      clickmap: true,
+      trackLinks: true,
+      accurateTrackBounce: true,
+      webvisor: true,
+      ecommerce: "dataLayer"
+    });
+  </script>
+)}
+
+{isEnabled && (
+  <noscript>
+    <div>
+      <img src={`https://mc.yandex.ru/watch/${YANDEX_METRIKA_ID}`} style="position:absolute; left:-9999px;" alt="" width="1" height="1" />
+    </div>
+  </noscript>
+)}
+
+<script>
+  // Отслеживание конверсий: клики по телефону, мессенджерам, картам
+  function setupAnalyticsGoals() {
+    if (typeof ym === 'undefined') return;
+
+    // Клик по телефону (tel: ссылки)
+    document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+      link.addEventListener('click', () => {
+        ym('YANDEX_METRIKA_ID', 'reachGoal', 'click_phone');
+      });
+    });
+
+    // Клик по мессенджерам (viber://, t.me, wa.me)
+    document.querySelectorAll('a[href^="viber:"], a[href*="t.me"], a[href*="wa.me"]').forEach(link => {
+      link.addEventListener('click', () => {
+        ym('YANDEX_METRIKA_ID', 'reachGoal', 'click_messenger');
+      });
+    });
+
+    // Клик по картам/маршрутам (yandex.ru/maps, google.com/maps)
+    document.querySelectorAll('a[href*="yandex.ru/maps"], a[href*="google.com/maps"]').forEach(link => {
+      link.addEventListener('click', () => {
+        ym('YANDEX_METRIKA_ID', 'reachGoal', 'click_map');
+      });
+    });
+  }
+
+  setupAnalyticsGoals();
+  document.addEventListener('astro:page-load', setupAnalyticsGoals);
+</script>

@@ -1,0 +1,262 @@
+---
+import { Star, ChevronLeft, ChevronRight, Quote, CheckCircle2, Car, Calendar } from 'lucide-astro';
+
+export const reviews = [
+  {
+    id: 1,
+    name: 'Сергей М.',
+    car: 'Volkswagen Passat B7 2.0 TDI',
+    service: 'Ремонт форсунок Bosch Common Rail',
+    date: '12 августа 2026',
+    rating: 5,
+    text: 'Машина стала троить на холодную и дымить черным при разгоне. Привез форсунки Bosch на стенд в МосСервис. За 25 минут проверили, дали тест-план. Оказался износ мультипликатора на 3-й форсунке. Заменили клапан, прописали новые коды. Двигатель работает идеально ровно, расход упал на 1.2 л!'
+  },
+  {
+    id: 2,
+    name: 'Алексей Г.',
+    car: 'Mercedes-Benz Sprinter 316 CDI',
+    service: 'Топливная аппаратура буса',
+    date: '5 августа 2026',
+    rating: 5,
+    text: 'Для нашего автопарка микроавтобусов задержка в ремонте — это убытки. Ребята из МосСервис сняли и восстановили 4 форсунки Delphi на Спринтере за пол дня! Дали распечатку с параметрами налива и официальный гарантийный талон. Работаем по безналу с НДС.'
+  },
+  {
+    id: 3,
+    name: 'Виталий Д.',
+    car: 'Toyota RAV4 2.2 D-4D',
+    service: 'Ремонт и кодирование Denso',
+    date: '28 июля 2026',
+    rating: 5,
+    text: 'В других автосервисах отказывались брать форсунки Denso, предлагали только покупать новые за огромные деньги. В МосСервисе отреставрировали родные форсунки, сгенерировали новые QR-коды для прошивки в ЭБУ. Тойота снова шепчет, пропала детонация.'
+  },
+  {
+    id: 4,
+    name: 'Дмитрий К.',
+    car: 'BMW X5 E70 3.0d',
+    service: 'Стендовая проверка и замена клапана',
+    date: '19 июля 2026',
+    rating: 5,
+    text: 'Приехал на компьютерную диагностику из-за ошибки по высокому давлению в рампе. Диагност быстро нашел проблему в регуляторе давления и сливе форсунки в обратку. Сделали стендовый тест всех 6 форсунок. Качественный подход, честные цены без накруток.'
+  },
+  {
+    id: 5,
+    name: 'Олег В.',
+    car: 'Renault Duster 1.5 dCi',
+    service: 'Ремонт форсунок Delphi C2I',
+    date: '11 июля 2026',
+    rating: 5,
+    text: 'Форсунки Delphi очень капризные к нашему дизелю. Забился клапан мультипликатора. В МосСервисе заменили оригинальные клапана Delphi, прописали C2I коды. Дали рекомендации по замене топливного фильтра. Машина поехала как новая!'
+  },
+  {
+    id: 6,
+    name: 'Игорь С.',
+    car: 'Audi A6 C7 3.0 TDI',
+    service: 'Диагностика пьезофорсунок Bosch',
+    date: '2 июля 2026',
+    rating: 5,
+    text: 'Обратился по поводу плавающих оборотов на холостом ходу. На стенде проверку прошли все 6 пьезофорсунок. Мастер показал график предвпрыска на мониторе. Настроили зазоры и гидрокомпенсатор. Высокий уровень профессионализма!'
+  },
+  {
+    id: 7,
+    name: 'Павел Н.',
+    car: 'Ford Transit 2.2 TDCi',
+    service: 'Капитальный ремонт ТНВД и форсунок',
+    date: '24 июня 2026',
+    rating: 5,
+    text: 'ТНВД начал гнать стружку по всей топливной системе. Думал попал на космическую сумму. Ребята промыли рампу, бак, перебрали насос высокого давления и форсунки. Все сделали в комплексе с гарантией 12 месяцев. Огромная благодарность!'
+  },
+  {
+    id: 8,
+    name: 'Максим Т.',
+    car: 'Kia Sorento 2.2 CRDi',
+    service: 'Замена регулятора давления',
+    date: '15 июня 2026',
+    rating: 5,
+    text: 'Быстро, четко и по делу. На диагностику записался день в день. Регулятор давления был в наличии на складе СТО, не пришлось ждать доставку из заграницы. Поменяли за час, сбросили ошибки.'
+  },
+  {
+    id: 9,
+    name: 'Евгений П.',
+    car: 'Peugeot 508 2.0 HDi',
+    service: 'Ремонт пьезофорсунок Continental',
+    date: '4 июня 2026',
+    rating: 5,
+    text: 'Сименс пьезо — самые сложные в ремонте форсунки в Минске, мало кто умеет их правильно делать. В МосСервисе восстановлением остался более чем доволен — машина заводится с полуоборота в любой мороз!'
+  },
+  {
+    id: 10,
+    name: 'Артем Б.',
+    car: 'Nissan X-Trail 1.6 dCi',
+    service: 'Чистка и стендовая диагностика',
+    date: '26 мая 2026',
+    rating: 5,
+    text: 'Делал профилактическую чистку и проверку форсунок перед долгой поездкой на юг. Проверили факел распыла, гидроплотность. Выдали распечатку с параметрами. Очень вежливый персонал и чистый цех.'
+  },
+  {
+    id: 11,
+    name: 'Роман Е.',
+    car: 'Hyundai Santa Fe 2.2 CRDi',
+    service: 'Ремонт форсунок Common Rail',
+    date: '14 мая 2026',
+    rating: 5,
+    text: 'Уже второй автомобиль обслуживаю на этом СТО. Качество стабильно высокое. Мастера знают все болячки корейских дизелей. Замена мультипликаторов и регулировка налива вернули двигателю былую тягу.'
+  },
+  {
+    id: 12,
+    name: 'Михаил К.',
+    car: 'Volkswagen Crafter 2.0 TDI',
+    service: 'Ремонт топливной аппаратуры',
+    date: '3 мая 2026',
+    rating: 5,
+    text: 'Коммерческий бус наматывает по 300 км в день. После ремонта форсунок в МосСервисе проехал уже более 30 000 км — никаких нареканий. Гарантию отрабатывают на 100%. Рекомендую всем владельцам!'
+  }
+];
+---
+
+<section class="py-16 bg-dark-900 border-y border-slate-800 overflow-hidden relative" id="reviews-section">
+  <div class="max-w-7xl mx-auto px-4">
+    <!-- Header Controls -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10">
+      <div>
+        <div class="inline-flex items-center space-x-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold px-3 py-1 rounded-full mb-3 uppercase tracking-wider">
+          <CheckCircle2 class="w-3.5 h-3.5" />
+          <span>Проверенные отзывы автовладельцев</span>
+        </div>
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-white">
+          Отзывы автовладельцев о <span class="text-primary-500">МосСервис</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-400 mt-2">
+          Более 240+ реальных оценок со средней оценкой <strong class="text-amber-400">4.9 / 5.0</strong> в Яндекс и Google
+        </p>
+      </div>
+
+      <!-- Navigation Arrows -->
+      <div class="flex items-center space-x-3 mt-6 sm:mt-0">
+        <button 
+          id="reviews-prev" 
+          aria-label="Предыдущий отзыв"
+          class="w-11 h-11 rounded-xl bg-dark-950 border border-slate-800 hover:border-primary-500 text-slate-300 hover:text-primary-400 flex items-center justify-center transition active:scale-95 shadow-md"
+        >
+          <ChevronLeft class="w-6 h-6" />
+        </button>
+        <button 
+          id="reviews-next" 
+          aria-label="Следующий отзыв"
+          class="w-11 h-11 rounded-xl bg-dark-950 border border-slate-800 hover:border-primary-500 text-slate-300 hover:text-primary-400 flex items-center justify-center transition active:scale-95 shadow-md"
+        >
+          <ChevronRight class="w-6 h-6" />
+        </button>
+      </div>
+    </div>
+
+    <!-- Slider Container -->
+    <div 
+      id="reviews-slider" 
+      class="flex space-x-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-none py-2 px-1"
+      style="scroll-behavior: smooth; -webkit-overflow-scrolling: touch;"
+    >
+      {reviews.map((rev) => (
+        <div class="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 snap-start">
+          <div class="bg-dark-950 rounded-2xl p-6 border border-slate-800/90 hover:border-primary-500/40 transition-all duration-300 h-full flex flex-col justify-between shadow-xl relative group">
+            
+            <Quote class="absolute top-4 right-4 w-8 h-8 text-slate-800/40 group-hover:text-primary-500/20 transition" />
+
+            <div>
+              <!-- Stars & Date -->
+              <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center space-x-1">
+                  {[...Array(rev.rating)].map(() => (
+                    <Star class="w-4 h-4 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                <div class="flex items-center space-x-1 text-[11px] text-slate-500">
+                  <Calendar class="w-3 h-3 text-slate-600" />
+                  <span>{rev.date}</span>
+                </div>
+              </div>
+
+              <!-- Review text -->
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-6 font-normal">
+                "{rev.text}"
+              </p>
+            </div>
+
+            <!-- Author & Car info -->
+            <div class="pt-4 border-t border-slate-800/80">
+              <div class="font-bold text-white text-sm mb-1">{rev.name}</div>
+              <div class="flex items-center space-x-1 text-xs text-primary-400 font-semibold mb-1">
+                <Car class="w-3.5 h-3.5 shrink-0" />
+                <span>{rev.car}</span>
+              </div>
+              <div class="text-[11px] text-slate-400 bg-slate-900/60 px-2.5 py-1 rounded-md inline-block">
+                Услуга: {rev.service}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Progress Indicator Dots -->
+    <div class="flex justify-center items-center space-x-2 mt-8" id="reviews-dots">
+      {reviews.map((_, index) => (
+        <span class={`w-2 h-2 rounded-full transition-all duration-300 ${index === 0 ? 'bg-primary-500 w-6' : 'bg-slate-700'}`} data-index={index}></span>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupSlider() {
+    const slider = document.getElementById('reviews-slider');
+    const prevBtn = document.getElementById('reviews-prev');
+    const nextBtn = document.getElementById('reviews-next');
+    const dots = document.querySelectorAll('#reviews-dots span');
+
+    if (!slider || !prevBtn || !nextBtn) return;
+
+    function getCardWidth() {
+      const firstCard = slider.firstElementChild;
+      return firstCard ? firstCard.clientWidth + 24 : 350;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      slider.scrollBy({ left: -getCardWidth(), behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      slider.scrollBy({ left: getCardWidth(), behavior: 'smooth' });
+    });
+
+    slider.addEventListener('scroll', () => {
+      const scrollPos = slider.scrollLeft;
+      const cardWidth = getCardWidth();
+      const activeIdx = Math.round(scrollPos / cardWidth);
+
+      dots.forEach((dot, idx) => {
+        if (idx === activeIdx) {
+          dot.classList.add('bg-primary-500', 'w-6');
+          dot.classList.remove('bg-slate-700', 'w-2');
+        } else {
+          dot.classList.remove('bg-primary-500', 'w-6');
+          dot.classList.add('bg-slate-700', 'w-2');
+        }
+      });
+    });
+  }
+
+  // Initialize on load & Astro page swap
+  setupSlider();
+  document.addEventListener('astro:page-load', setupSlider);
+</script>
+
+<style>
+  #reviews-slider {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  #reviews-slider::-webkit-scrollbar {
+    display: none;
+  }
+</style>

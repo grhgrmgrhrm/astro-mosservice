@@ -1,0 +1,62 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { siteConfig } from '@/data/siteConfig';
+import { Wrench, ArrowRight, Phone, Home } from 'lucide-astro';
+
+const popularServices = [
+  { label: 'Ремонт форсунок Common Rail', href: '/uslugi/remont-dizelnyh-forsunok-common-rail' },
+  { label: 'Ремонт ТНВД', href: '/uslugi/remont-tnvd' },
+  { label: 'Ремонт форсунок Bosch', href: '/uslugi/remont-forsunok-bosch' },
+  { label: 'Стендовая проверка форсунок', href: '/uslugi/stendovaya-proverka-forsunok' },
+  { label: 'Компьютерная диагностика', href: '/uslugi/kompyuternaya-diagnostika' },
+];
+---
+
+<Layout
+  title="Страница не найдена (404) | СТО МосСервис Минск"
+  description="Запрашиваемая страница не найдена. Перейдите на главную или выберите услугу по ремонту форсунок и ТНВД в Минске."
+>
+  <div class="max-w-3xl mx-auto px-4 py-20 text-center">
+    <div class="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-primary-500/10 border border-primary-500/30 text-primary-500 mb-8">
+      <Wrench class="w-10 h-10" />
+    </div>
+
+    <div class="text-7xl sm:text-8xl font-black text-primary-500 mb-4 leading-none">404</div>
+    <h1 class="text-2xl sm:text-3xl font-extrabold text-white mb-4">
+      Страница не найдена
+    </h1>
+    <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-10 max-w-xl mx-auto">
+      Похоже, такой страницы больше нет или она была перемещена. Вы можете вернуться на главную, выбрать услугу из каталога или позвонить нам — поможем разобраться.
+    </p>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
+      <a href="/" class="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-accent-500 text-slate-950 font-bold px-6 py-3.5 rounded-xl text-xs uppercase tracking-wider transition">
+        <Home class="w-4 h-4" />
+        <span>На главную</span>
+      </a>
+      <a href="/uslugi" class="inline-flex items-center space-x-2 bg-slate-800 hover:bg-slate-700 text-white font-bold px-6 py-3.5 rounded-xl text-xs uppercase tracking-wider border border-slate-700 transition">
+        <span>Каталог услуг</span>
+        <ArrowRight class="w-4 h-4" />
+      </a>
+    </div>
+
+    <div class="bg-dark-900 border border-slate-800 rounded-2xl p-6 text-left">
+      <h2 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Популярные услуги</h2>
+      <ul class="space-y-2 text-sm">
+        {popularServices.map(service => (
+          <li>
+            <a href={service.href} class="text-slate-300 hover:text-primary-400 transition flex items-center justify-between group">
+              <span>{service.label}</span>
+              <ArrowRight class="w-3.5 h-3.5 text-slate-600 group-hover:text-primary-500 group-hover:translate-x-1 transition" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <a href={`tel:${siteConfig.phoneClean}`} class="inline-flex items-center space-x-2 mt-8 text-primary-400 hover:text-primary-300 font-bold text-sm transition">
+      <Phone class="w-4 h-4" />
+      <span>{siteConfig.phonePrimary}</span>
+    </a>
+  </div>
+</Layout>

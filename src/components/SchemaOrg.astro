@@ -1,0 +1,98 @@
+---
+import { siteConfig } from '@/data/siteConfig';
+
+interface Props {
+  type?: 'home' | 'service' | 'article' | 'page';
+  title?: string;
+  description?: string;
+  image?: string;
+  slug?: string;
+  priceFrom?: string;
+  faq?: Array<{ question: string; answer: string }>;
+}
+
+const { type = 'page', title, description, image, slug, priceFrom, faq } = Astro.props;
+
+const currentUrl = slug ? `${siteConfig.url}/uslugi/${slug}` : siteConfig.url;
+const imageUrl = image ? (image.startsWith('http') ? image : `${siteConfig.url}${image}`) : `${siteConfig.url}/images/hero/hero.webp`;
+
+const autoRepairSchema = {
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "@id": `${siteConfig.url}/#organization`,
+  "name": siteConfig.name,
+  "legalName": siteConfig.legalName,
+  "url": siteConfig.url,
+  "logo": `${siteConfig.url}/images/hero/hero.webp`,
+  "image": imageUrl,
+  "description": description || siteConfig.description,
+  "telephone": siteConfig.phonePrimary,
+  "email": siteConfig.email,
+  "priceRange": siteConfig.priceRange,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": siteConfig.address.street,
+    "addressLocality": siteConfig.address.city,
+    "postalCode": siteConfig.address.postalCode,
+    "addressCountry": siteConfig.address.country
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": siteConfig.address.latitude,
+    "longitude": siteConfig.address.longitude
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "08:00",
+      "closes": "20:00"
+    }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "248"
+  }
+};
+
+const serviceSchema = type === 'service' ? {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": title,
+  "description": description,
+  "provider": {
+    "@type": "AutoRepair",
+    "name": siteConfig.name,
+    "url": siteConfig.url
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Минск"
+  },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "BYN",
+    "price": priceFrom ? priceFrom.replace(/[^0-9]/g, '') || "35" : "35",
+    "availability": "https://schema.org/InStock",
+    "url": currentUrl
+  }
+} : null;
+
+const faqSchema = faq && faq.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faq.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer
+    }
+  }))
+} : null;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(autoRepairSchema)} />
+{serviceSchema && <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />}
+{faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}

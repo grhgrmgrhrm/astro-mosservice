@@ -1,0 +1,256 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { siteConfig } from '@/data/siteConfig';
+import { HelpCircle, Phone, MapPin, Globe, CheckCircle2, ChevronDown, Wrench, ShieldCheck, Building2 } from 'lucide-astro';
+
+const faqItems = [
+  // Категория: Common Rail (1-6)
+  {
+    category: 'common-rail',
+    question: 'Какие признаки указывают на неисправность дизельных форсунок Common Rail?',
+    answer: 'Затрудненный запуск двигателя (особенно на холодную), повышенная дымность (черный или сизый выхлоп), плавающие обороты холостого хода, снижение тяги, стук при разгоне и повышенный расход дизельного топлива. При появлении этих симптомов рекомендуем записаться на диагностику в «МосСервис» по телефону ' + siteConfig.phonePrimary + '.'
+  },
+  {
+    category: 'common-rail',
+    question: 'Как происходит ремонт форсунок Common Rail на вашем СТО в Минске?',
+    answer: 'Ремонт включает снятие, очистку в ультразвуковой ванне, дефектовку на авторизованном стенде Bosch EPS / Hartridge, замену изношенных клапанов-мультипликаторов и распылителей, регулировку предвпрыска и присвоение новых кодов коррекции. Детали можно узнать на нашем сайте ' + siteConfig.url + '.'
+  },
+  {
+    category: 'common-rail',
+    question: 'Где находится ваш дизельный сервис в Минске?',
+    answer: 'Наш сервисный центр расположен по адресу: ' + siteConfig.address.full + '. Схему проезда и маршрут в Яндекс Картах или Google Maps можно открыть на сайте ' + siteConfig.url + '/kontakty.'
+  },
+  {
+    category: 'common-rail',
+    question: 'Обязательно ли прописывать новые коды форсунок в ЭБУ авто после ремонта?',
+    answer: 'Да, генерация и прописка кодов IMA/QR (Denso), C2I/C3I (Delphi) или Bosch в электронный блок управления обязательны для правильной дозировки топлива и стабильной работы двигателя.'
+  },
+  {
+    category: 'common-rail',
+    question: 'Форсунки каких брендов вы ремонтируете?',
+    answer: 'Мы ремонтируем дизельные и бензиновые форсунки всех ведущих производителей: Bosch (CRI/CRIN), Denso, Delphi, Continental (Siemens / VDO).'
+  },
+  {
+    category: 'common-rail',
+    question: 'Сколько времени занимает ремонт одной дизельной форсунки?',
+    answer: 'Стендовая проверка занимает 20–30 минут. Капитальный ремонт комплекта форсунок выполняется за 2–4 часа при наличии оригинальных запчастей на нашем складе.'
+  },
+
+  // Категория: ТНВД (7-11)
+  {
+    category: 'tnvd',
+    question: 'По какому адресу можно привезти снятый ТНВД на проверку?',
+    answer: 'Вы можете привезти снятый топливный насос или приехать на автомобиле по адресу: ' + siteConfig.address.full + '. Мы работаем ' + siteConfig.workingHours + ' по записи по телефону ' + siteConfig.phonePrimary + '.'
+  },
+  {
+    category: 'tnvd',
+    question: 'Как понять, что ТНВД погнал стружку по топливной системе?',
+    answer: 'В топливном фильтре или баке появляется серебристая пудра (металлическая стружка), машина глохнет под нагрузкой и выходят из строя сразу несколько форсунок. В этом случае требуется промывка всей магистрали и ремонт ТНВД.'
+  },
+  {
+    category: 'tnvd',
+    question: 'Выполняете ли вы восстановление плунжерных пар ТНВД?',
+    answer: 'Да, мы производим замену и восстановление плунжерных пар, сальников, дозирующих клапанов и ремкомплектов высокого давления с последующей регулировкой на стенде.'
+  },
+  {
+    category: 'tnvd',
+    question: 'Обслуживаете ли вы коммерческий транспорт и микроавтобусы?',
+    answer: 'Да, СТО «МосСервис» специализируется на ремонте топливной аппаратуры микроавтобусов и легких грузовиков (Mercedes Sprinter, VW Crafter/Transporter, Ford Transit, Fiat Ducato, Peugeot Boxer).'
+  },
+  {
+    category: 'tnvd',
+    question: 'Можно ли отремонтировать пьезофорсунки Continental (Siemens)?',
+    answer: 'Да, наша лаборатория оснащена оборудованием для настройки пьезоэлементов и замены мультипликаторов на форсунках Continental / Siemens VDO.'
+  },
+
+  // Категория: Бензиновые форсунки (12-16)
+  {
+    category: 'gasoline',
+    question: 'Чем отличается чистка бензиновых форсунок на стенде от ультразвуковой ванны?',
+    answer: 'Стендовая промывка очищает внутренние каналы и дозирующие иглы под давлению спецсоставом, а ультразвуковая ванна разрушает твердые смолистые отложения на сопле распылителя. Мы комбинируем оба метода.'
+  },
+  {
+    category: 'gasoline',
+    question: 'Ремонтируете ли вы бензиновые форсунки прямого впрыска (FSI, TSI, GDI)?',
+    answer: 'Да, мы проверяем и очищаем бензиновые форсунки высокого давления систем FSI, TSI, TFSI, GDI, SkyActiv на профильном стенде.'
+  },
+  {
+    category: 'gasoline',
+    question: 'Выдаете ли вы распечатку тест-плана после стендовой проверки?',
+    answer: 'Обязательно. Каждый клиент получает официальный распечатанный графический тест-план с параметрами налива, обратки, герметичности и времени срабатывания.'
+  },
+  {
+    category: 'gasoline',
+    question: 'Сколько стоит стендовая проверка одной форсунки?',
+    answer: 'Проверка одной форсунки с распечаткой тест-плана стоит от 15 BYN. Актуальный прайс-лист можно посмотреть на странице ' + siteConfig.url + '/uslugi.'
+  },
+  {
+    category: 'gasoline',
+    question: 'Нужно ли менять уплотнительные медные шайбы при установке форсунок?',
+    answer: 'Да, установка новых медных шайб и уплотнительных колец является обязательным требованием при каждом монтировании форсунок в колодцы ГБЦ.'
+  },
+
+  // Категория: Гарантия и реквизиты (17-21)
+  {
+    category: 'warranty',
+    question: 'Какая гарантия предоставляется на отремонтированные форсунки и ТНВД?',
+    answer: 'На все выполненные работы и замененные оригинальные запчасти СТО «МосСервис» предоставляет гарантию 12 месяцев или 20 000 км пробега.'
+  },
+  {
+    category: 'warranty',
+    question: 'Вы работаете с юридическими лицами по безналичному расчету?',
+    answer: 'Да, мы работаем с физическими лицами и организациями по безналичному расчету с выделением НДС 20%. Услуги оказывает ' + siteConfig.legalName + ' (УНП ' + siteConfig.unp + ', р/с ' + siteConfig.bankDetails.account + ' в ' + siteConfig.bankDetails.bankName + ').'
+  },
+  {
+    category: 'warranty',
+    question: 'Как связаться с отделом приёмки для уточнения статуса ремонта?',
+    answer: 'Позвонить мастеру-приемщику можно по номеру ' + siteConfig.phonePrimary + ' или написать в мессенджеры Viber, Telegram, WhatsApp, ссылки на которые доступны на ' + siteConfig.url + '.'
+  },
+  {
+    category: 'warranty',
+    question: 'Есть ли в наличии запчасти для ремонта топливной системы?',
+    answer: 'Да, на нашем складе в Минске по ' + siteConfig.address.full + ' всегда в наличии оригинальные клапана, распылители, мультипликаторы и ремкомплекты Bosch, Denso, Delphi.'
+  },
+  {
+    category: 'warranty',
+    question: 'Как записаться на удобное время, чтобы не стоять в очереди?',
+    answer: 'Для предварительной записи позвоните по номеру ' + siteConfig.phonePrimary + ' или выберите услугу на сайте ' + siteConfig.url + '/uslugi.'
+  },
+
+  // Категория: Диагностика и рекомендации (22-25)
+  {
+    category: 'diagnostics',
+    question: 'Как часто нужно проводить профилактическую диагностику форсунок?',
+    answer: 'Рекомендуется проверять дизельные форсунки на стенде каждые 80 000 – 100 000 км пробега или при каждой замене ГРМ.'
+  },
+  {
+    category: 'diagnostics',
+    question: 'Какое топливо и фильтры использовать для защиты топливной системы Common Rail?',
+    answer: 'Используйте качественный дизель на сетевых АЗС и меняйте топливный фильтр тонкой очистки каждые 10 000 км. Устанавливайте только оригинальные фильтры (Knecht/Mahle, Mann, Purflux).'
+  },
+  {
+    category: 'diagnostics',
+    question: 'Можно ли эксплуатировать автомобиль, если одна из форсунок сливает в обратку?',
+    answer: 'Нет, так как сильный слив в обратку снижает давление в топливной рампе, машина плохо заводится, а прогорание дозирующей иглы может привести к прогару поршня и капитальному ремонту двигателя.'
+  },
+  {
+    category: 'diagnostics',
+    question: 'Проводите ли вы компьютерную диагностику перед снятием форсунок?',
+    answer: 'Да, перед снятием элементов мы проводим компьютерную диагностику сканером, считываем коррекцию по цилиндрам и параметры давления Common Rail в реальном времени.'
+  }
+];
+
+const categories = [
+  { id: 'all', label: 'Все 25 вопросов' },
+  { id: 'common-rail', label: 'Common Rail' },
+  { id: 'tnvd', label: 'ТНВД' },
+  { id: 'gasoline', label: 'Бензиновые' },
+  { id: 'warranty', label: 'Гарантия и реквизиты' },
+  { id: 'diagnostics', label: 'Диагностика' },
+];
+---
+
+<Layout 
+  showContactWidget={true}
+  title="Вопросы и ответы (FAQ) по ремонту форсунок и ТНВД в Минске | МосСервис" 
+  description="Ответы на самые популярные вопросы по диагностике, стендовой проверке, кодированию и ремонту дизельных и бензиновых форсунок Common Rail в Минске. Гарантия 12 месяцев."
+  faq={faqItems.map(item => ({ question: item.question, answer: item.answer }))}
+>
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <Breadcrumbs items={[{ label: 'Частые вопросы (FAQ)' }]} />
+
+    <div class="mb-10 text-left">
+      <div class="inline-flex items-center space-x-2 bg-primary-500/10 border border-primary-500/30 text-primary-400 text-xs font-semibold px-3.5 py-1.5 rounded-full mb-4 uppercase tracking-wider">
+        <HelpCircle class="w-4 h-4 text-primary-500" />
+        <span>База знаний СТО МосСервис</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">
+        Часто задаваемые вопросы и ответы (FAQ)
+      </h1>
+      <p class="text-slate-300 text-sm sm:text-base max-w-3xl leading-relaxed">
+        Подробные ответы инженеров-дизелистов на популярные вопросы о диагностике, стоимости, сроках ремонта форсунок Bosch, Denso, Delphi, Continental и ТНВД в Минске.
+      </p>
+    </div>
+
+    <!-- Category Tabs Filter -->
+    <div class="flex items-center space-x-2 overflow-x-auto pb-4 mb-8 text-xs font-semibold">
+      {categories.map((cat, idx) => (
+        <button 
+          data-faq-filter={cat.id}
+          class={`px-4 py-2.5 rounded-xl border transition-all duration-200 whitespace-nowrap ${idx === 0 ? 'bg-primary-500 text-slate-950 border-primary-500 font-bold' : 'bg-dark-900 text-slate-300 border-slate-800 hover:border-primary-500/60'}`}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+
+    <!-- FAQ Accordion List -->
+    <div class="space-y-4 max-w-5xl" id="faq-list">
+      {faqItems.map((item, index) => (
+        <details data-faq-card data-category={item.category} class="bg-dark-900 border border-slate-800/90 hover:border-primary-500/40 rounded-2xl p-5 sm:p-6 group cursor-pointer transition shadow-lg">
+          <summary class="font-bold text-white text-base sm:text-lg flex justify-between items-center list-none select-none">
+            <span class="flex items-start space-x-3 pr-4">
+              <span class="text-primary-500 font-black text-sm mt-0.5 shrink-0">Q{index + 1}.</span>
+              <span>{item.question}</span>
+            </span>
+            <span class="w-8 h-8 rounded-lg bg-dark-950 border border-slate-800 text-primary-500 flex items-center justify-center shrink-0 transition group-open:rotate-180">
+              <ChevronDown class="w-5 h-5" />
+            </span>
+          </summary>
+          <div class="text-xs sm:text-sm text-slate-300 mt-4 leading-relaxed border-t border-slate-800/80 pt-4 pl-8">
+            <p>{item.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <!-- Call Box -->
+    <div class="mt-12 p-6 sm:p-8 bg-dark-900 border border-slate-800 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div>
+        <h3 class="text-lg font-bold text-white mb-1">Не нашли ответ на свой вопрос?</h3>
+        <p class="text-xs sm:text-sm text-slate-400">Позвоните нашему мастеру-приемщику — проконсультируем и рассчитаем стоимость за 2 минуты.</p>
+      </div>
+      <a href={`tel:${siteConfig.phoneClean}`} class="bg-primary-500 hover:bg-primary-400 text-slate-950 font-bold px-6 py-3.5 rounded-xl text-xs uppercase tracking-wider shrink-0 transition">
+        Задать вопрос: {siteConfig.phonePrimary}
+      </a>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  function setupFaqFilter() {
+    const filterBtns = document.querySelectorAll('[data-faq-filter]');
+    const cards = document.querySelectorAll('[data-faq-card]');
+
+    if (!filterBtns.length || !cards.length) return;
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-faq-filter');
+
+        filterBtns.forEach(b => {
+          if (b === btn) {
+            b.classList.add('bg-primary-500', 'text-slate-950', 'border-primary-500', 'font-bold');
+            b.classList.remove('bg-dark-900', 'text-slate-300', 'border-slate-800');
+          } else {
+            b.classList.remove('bg-primary-500', 'text-slate-950', 'border-primary-500', 'font-bold');
+            b.classList.add('bg-dark-900', 'text-slate-300', 'border-slate-800');
+          }
+        });
+
+        cards.forEach(card => {
+          const cardCat = card.getAttribute('data-category');
+          if (filter === 'all' || cardCat === filter) {
+            (card as HTMLElement).style.display = 'block';
+          } else {
+            (card as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  setupFaqFilter();
+  document.addEventListener('astro:page-load', setupFaqFilter);
+</script>

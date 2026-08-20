@@ -1,0 +1,160 @@
+---
+import { siteConfig } from '@/data/siteConfig';
+import { Phone, Clock, MapPin, Wrench, Menu, X } from 'lucide-astro';
+
+const pathname = Astro.url.pathname;
+const isActive = (href: string) => {
+  if (href === '/') return pathname === '/';
+  return pathname.startsWith(href);
+};
+
+const navLinks = [
+  { label: 'Главная', href: '/' },
+  { label: 'Все услуги', href: '/uslugi' },
+  { label: 'FAQ', href: '/faq' },
+  { label: 'О сервисе', href: '/o-nas' },
+  { label: 'Контакты', href: '/kontakty' },
+];
+---
+
+<!-- Top Contact Bar -->
+<div class="bg-dark-950 text-slate-300 text-xs py-2 border-b border-slate-800 hidden sm:block">
+  <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+    <div class="flex items-center space-x-6">
+      <div class="flex items-center space-x-2">
+        <MapPin class="w-3.5 h-3.5 text-primary-500" />
+        <span>{siteConfig.address.full}</span>
+      </div>
+      <div class="flex items-center space-x-2">
+        <Clock class="w-3.5 h-3.5 text-accent-500" />
+        <span>{siteConfig.workingHours}</span>
+      </div>
+    </div>
+    <div class="flex items-center space-x-4">
+      <a href={siteConfig.social.viber} class="hover:text-white transition">Viber</a>
+      <a href={siteConfig.social.telegram} class="hover:text-white transition">Telegram</a>
+      <a href={siteConfig.social.whatsapp} class="hover:text-white transition">WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<!-- Main Header -->
+<header class="bg-dark-900/95 backdrop-blur sticky top-0 z-50 border-b border-slate-800">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="/" class="flex items-center space-x-3 group">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-accent-600 flex items-center justify-center text-slate-950 font-bold shadow-lg shadow-primary-500/20 group-hover:scale-105 transition">
+        <Wrench class="w-6 h-6 stroke-[2.5]" />
+      </div>
+      <div>
+        <span class="text-xl font-extrabold tracking-tight text-white block leading-none">
+          МОС<span class="text-primary-500">СЕРВИС</span>
+        </span>
+        <span class="text-[10px] text-slate-400 font-medium uppercase tracking-wider block mt-0.5">
+          Ремонт форсунок & ТНВД Минск
+        </span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-200" aria-label="Основная навигация">
+      {navLinks.map(link => (
+        <a href={link.href} class="hover:text-primary-500 transition" aria-current={isActive(link.href) ? 'page' : undefined}>
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Phone & CTA -->
+    <div class="flex items-center space-x-4">
+      <a href={`tel:${siteConfig.phoneClean}`} class="hidden lg:flex items-center space-x-2 text-right">
+        <div class="w-8 h-8 rounded-full bg-primary-500/10 border border-primary-500/30 flex items-center justify-center text-primary-500">
+          <Phone class="w-4 h-4" />
+        </div>
+        <div>
+          <div class="text-sm font-bold text-white leading-none">{siteConfig.phonePrimary}</div>
+          <div class="text-[11px] text-emerald-400 font-medium">Без выходных</div>
+        </div>
+      </a>
+      <a href="/kontakty" class="hidden sm:inline-block bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-accent-500 text-slate-950 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider shadow-md shadow-primary-600/20 transition transform active:scale-95">
+        Записаться
+      </a>
+
+      <!-- Mobile Menu Toggle -->
+      <button
+        id="mobile-menu-toggle"
+        type="button"
+        class="md:hidden w-10 h-10 rounded-lg bg-dark-950 border border-slate-800 text-slate-200 flex items-center justify-center transition hover:border-primary-500 hover:text-primary-400"
+        aria-label="Открыть меню"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <Menu class="w-5 h-5 menu-open-icon" />
+        <X class="w-5 h-5 menu-close-icon hidden" />
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation Panel -->
+  <nav id="mobile-menu" class="md:hidden hidden bg-dark-950 border-t border-slate-800" aria-label="Мобильная навигация">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col space-y-1">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class={`px-3 py-3 rounded-lg text-sm font-medium transition ${isActive(link.href) ? 'bg-primary-500/10 text-primary-400 border-l-2 border-primary-500' : 'text-slate-200 hover:bg-slate-800/60 hover:text-primary-400'}`}
+          aria-current={isActive(link.href) ? 'page' : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a href={`tel:${siteConfig.phoneClean}`} class="mt-3 flex items-center justify-center space-x-2 bg-gradient-to-r from-primary-600 to-primary-500 text-slate-950 font-bold py-3.5 rounded-xl text-sm uppercase tracking-wider">
+        <Phone class="w-4 h-4" />
+        <span>{siteConfig.phonePrimary}</span>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  function setupMobileMenu() {
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const openIcon = toggle?.querySelector('.menu-open-icon');
+    const closeIcon = toggle?.querySelector('.menu-close-icon');
+
+    if (!toggle || !menu) return;
+
+    toggle.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('hidden') === false;
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      toggle.setAttribute('aria-label', isOpen ? 'Закрыть меню' : 'Открыть меню');
+      openIcon?.classList.toggle('hidden', isOpen);
+      closeIcon?.classList.toggle('hidden', !isOpen);
+    });
+
+    // Close on link click
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.add('hidden');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Открыть меню');
+        openIcon?.classList.remove('hidden');
+        closeIcon?.classList.add('hidden');
+      });
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Открыть меню');
+        openIcon?.classList.remove('hidden');
+        closeIcon?.classList.add('hidden');
+      }
+    });
+  }
+
+  setupMobileMenu();
+  document.addEventListener('astro:page-load', setupMobileMenu);
+</script>

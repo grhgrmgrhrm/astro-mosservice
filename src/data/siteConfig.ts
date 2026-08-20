@@ -1,0 +1,42 @@
+export const siteConfig = {
+  name: 'СТО МосСервис',
+  legalName: 'ООО «УпакПринтСервис»',
+  unp: '192513965',
+  bankDetails: {
+    account: 'BY19BLNB30120000279707000933',
+    bankName: 'ОАО «БНБ-Банк»',
+    bic: 'BLNBBY2X',
+    unp: '192513965',
+  },
+  title: 'Ремонт дизельных и бензиновых форсунок в Минске | МосСервис',
+  description: 'Специализированный ремонт форсунок Common Rail (Bosch, Denso, Delphi, Continental), проверка на стендах, ремонт ТНВД и компьютерная диагностика в Минске. Гарантия 12 месяцев.',
+  url: 'https://mosservice.by',
+  phonePrimary: '+375 (29) 373-71-61',
+  phoneSecondary: '+375 (29) 373-71-61',
+  phoneClean: '+375293737161',
+  address: {
+    city: 'Минск',
+    street: 'Передовая ул., 6, корп. 12',
+    full: 'г. Минск, Передовая ул., 6, корп. 12',
+    postalCode: '220075',
+    country: 'BY',
+    latitude: 53.8989447,
+    longitude: 27.6230488,
+  },
+  maps: {
+    google: 'https://www.google.com/maps/dir/?api=1&destination=53.8989447,27.6230488',
+    yandex: 'https://yandex.ru/maps/?rtext=~53.8989447,27.6230488&rtt=auto',
+  },
+  workingHours: 'Ежедневно: 08:00 - 20:00, без выходных',
+  workingHoursIso: 'Mo-Su 08:00-20:00',
+  email: 'info@mosservice.by',
+  ogImage: '/images/og/og-default.webp',
+  priceRange: '$',
+  experienceYears: 14,
+  warranty: '12 месяцев или 20 000 км',
+  social: {
+    viber: 'viber://chat?number=%2B375293737161',
+    telegram: 'https://t.me/mosservice_by',
+    whatsapp: 'https://wa.me/375293737161',
+  }
+};

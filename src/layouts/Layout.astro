@@ -1,0 +1,97 @@
+---
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import SchemaOrg from '@/components/SchemaOrg.astro';
+import Analytics from '@/components/Analytics.astro';
+import '@/styles/global.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/inter/800.css';
+import '@fontsource/inter/900.css';
+import { siteConfig } from '@/data/siteConfig';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'home' | 'service' | 'article' | 'page';
+  slug?: string;
+  priceFrom?: string;
+  faq?: Array<{ question: string; answer: string }>;
+  showContactWidget?: boolean;
+}
+
+const { 
+  title = siteConfig.title, 
+  description = siteConfig.description,
+  image = siteConfig.ogImage ?? '/images/og/og-default.webp',
+  type = 'page',
+  slug,
+  priceFrom,
+  faq,
+  showContactWidget
+} = Astro.props;
+
+const shouldShowContact = showContactWidget ?? (type === 'service');
+const canonicalUrl = slug ? `${siteConfig.url}/uslugi/${slug}` : siteConfig.url;
+---
+
+<!DOCTYPE html>
+<html lang="ru" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b0f19" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon-180.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    {type === 'home' && (
+      <link
+        rel="preload"
+        as="image"
+        href="/images/hero/hero-desktop.webp"
+        imagesrcset="/images/hero/hero-mobile.webp 800w, /images/hero/hero-desktop.webp 1920w"
+        imagesizes="100vw"
+        fetchpriority="high"
+      />
+    )}
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteConfig.url}${image}`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:locale" content="ru_RU" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteConfig.url}${image}`} />
+    <meta name="twitter:image:alt" content={title} />
+
+    <!-- Schema.org JSON-LD -->
+    <SchemaOrg type={type} title={title} description={description} image={image} slug={slug} priceFrom={priceFrom} faq={faq} />
+  </head>
+  <body class="bg-dark-950 text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-primary-500 selection:text-slate-950">
+    <a href="#main-content" class="skip-link">Перейти к основному содержимому</a>
+    <Header />
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+    <Footer showContactWidget={shouldShowContact} />
+    <Analytics />
+  </body>
+</html>
