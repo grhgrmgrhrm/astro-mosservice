@@ -72,7 +72,7 @@ const serviceSchema = type === 'service' ? {
   },
   "offers": {
     "@type": "Offer",
-    "priceCurrency": "BYN",
+    "priceCurrency": siteConfig.currency,
     "price": priceFrom ? priceFrom.replace(/[^0-9]/g, '') || "35" : "35",
     "availability": "https://schema.org/InStock",
     "url": currentUrl

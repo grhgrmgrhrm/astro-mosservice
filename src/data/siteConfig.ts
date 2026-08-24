@@ -1,19 +1,23 @@
 export const siteConfig = {
   name: 'СТО МосСервис',
-  legalName: 'ООО «УпакПринтСервис»',
-  unp: '192513965',
+  legalName: 'ООО «Московский АСервис»',
+  legalShortName: 'Московский АСервис',
+  unp: '193933304',
+  vatRate: '20%',
+  currency: 'BYN',
+  currencyName: 'Белорусский рубль',
   bankDetails: {
     account: 'BY19BLNB30120000279707000933',
     bankName: 'ОАО «БНБ-Банк»',
     bic: 'BLNBBY2X',
-    unp: '192513965',
+    unp: '193933304',
   },
   title: 'Ремонт дизельных и бензиновых форсунок в Минске | МосСервис',
-  description: 'Специализированный ремонт форсунок Common Rail (Bosch, Denso, Delphi, Continental), проверка на стендах, ремонт ТНВД и компьютерная диагностика в Минске. Гарантия 12 месяцев.',
+  description: 'Проверка, диагностика и ремонт дизельных форсунок и ТНВД, бензиновых форсунок, РВД, дозировочных блоков. Ультразвуковая чистка топливной аппаратуры. Гарантия 12 месяцев.',
   url: 'https://mosservice.by',
-  phonePrimary: '+375 (29) 373-71-61',
-  phoneSecondary: '+375 (29) 373-71-61',
-  phoneClean: '+375293737161',
+  phonePrimary: '+375 (29) 181-81-32',
+  phoneSecondary: '+375 (29) 181-81-32',
+  phoneClean: '+375291818132',
   address: {
     city: 'Минск',
     street: 'Передовая ул., 6, корп. 12',
@@ -35,8 +39,8 @@ export const siteConfig = {
   experienceYears: 14,
   warranty: '12 месяцев или 20 000 км',
   social: {
-    viber: 'viber://chat?number=%2B375293737161',
+    viber: 'viber://chat?number=%2B375291818132',
     telegram: 'https://t.me/mosservice_by',
-    whatsapp: 'https://wa.me/375293737161',
+    whatsapp: 'https://wa.me/375291818132',
   }
 };

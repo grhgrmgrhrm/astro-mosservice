@@ -5,9 +5,10 @@ import { siteConfig } from '@/data/siteConfig';
 import { MapPin, Phone, Mail, Clock, Navigation, Building2, CreditCard, FileText, CheckCircle2 } from 'lucide-astro';
 
 const mapWidgetUrl = `https://yandex.ru/map-widget/v1/?ll=${siteConfig.address.longitude}%2C${siteConfig.address.latitude}&z=16&pt=${siteConfig.address.longitude},${siteConfig.address.latitude},pm2rdm`;
+const metaDescription = `Контактная информация СТО МосСервис: телефоны, адрес в Минске (${siteConfig.address.street}), карта проезда, режим работы и реквизиты ${siteConfig.legalName}.`;
 ---
 
-<Layout title="Контакты и реквизиты | СТО МосСервис в Минске" description="Контактная информация СТО МосСервис: телефоны, адрес в Минске (Передовая ул., 6, корп. 12), карта проезда, режим работы и реквизиты ООО УпакПринтСервис.">
+<Layout title="Контакты и реквизиты | СТО МосСервис в Минске" description={metaDescription}>
   <div class="max-w-7xl mx-auto px-4 py-8">
     <Breadcrumbs items={[{ label: 'Контакты и реквизиты' }]} />
 
@@ -93,7 +94,7 @@ const mapWidgetUrl = `https://yandex.ru/map-widget/v1/?ll=${siteConfig.address.l
       </div>
     </div>
 
-    <!-- Requisites Section (Юридические данные ООО УпакПринтСервис) -->
+    <!-- Requisites Section -->
     <div class="bg-dark-900 p-6 sm:p-10 rounded-3xl border border-slate-800 shadow-xl">
       <div class="flex items-center space-x-3 mb-6">
         <div class="w-10 h-10 rounded-xl bg-primary-500/20 text-primary-500 flex items-center justify-center">
@@ -115,7 +116,7 @@ const mapWidgetUrl = `https://yandex.ru/map-widget/v1/?ll=${siteConfig.address.l
         <div class="bg-dark-950 p-5 rounded-2xl border border-slate-800/80">
           <span class="text-xs text-slate-400 font-bold uppercase tracking-wider block mb-1">Расчетный счет (IBAN)</span>
           <span class="text-emerald-400 font-mono font-bold text-sm block tracking-wide select-all">{siteConfig.bankDetails.account}</span>
-          <span class="text-xs text-slate-400 mt-2 block">Валюта: <strong>BYN (Белорусский рубль)</strong></span>
+          <span class="text-xs text-slate-400 mt-2 block">Валюта: <strong>{siteConfig.currency} ({siteConfig.currencyName})</strong></span>
         </div>
 
         <div class="bg-dark-950 p-5 rounded-2xl border border-slate-800/80">
@@ -128,7 +129,7 @@ const mapWidgetUrl = `https://yandex.ru/map-widget/v1/?ll=${siteConfig.address.l
       <div class="mt-6 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
         <div class="flex items-center space-x-2">
           <CheckCircle2 class="w-4 h-4 text-emerald-400 shrink-0" />
-          <span>Выделяем НДС 20% при безналичном расчете с организациями</span>
+          <span>Выделяем НДС {siteConfig.vatRate} при безналичном расчете с организациями</span>
         </div>
         <a href={`mailto:${siteConfig.email}`} class="text-primary-400 hover:underline font-semibold">
           Запросить счет-фактуру: {siteConfig.email}
