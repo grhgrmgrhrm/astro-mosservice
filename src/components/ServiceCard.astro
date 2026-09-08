@@ -1,5 +1,6 @@
 ---
 import { ArrowRight, Clock, ShieldCheck, Tag } from 'lucide-astro';
+import { url } from '@/utils/url';
 
 interface Props {
   title: string;
@@ -14,7 +15,7 @@ interface Props {
 const { title, description, slug, image, priceFrom, executionTime, category } = Astro.props;
 
 // Конвертируем путь к картинке в card-версию (480x320) для адаптивного srcset
-const cardImage = image.replace(/\.webp$/, '-card.webp');
+const cardImage = url(image.replace(/\.webp$/, '-card.webp'));
 
 const categoryLabels: Record<string, string> = {
   'common-rail': 'Common Rail',
@@ -45,7 +46,7 @@ const categoryLabels: Record<string, string> = {
   <div class="p-5 flex-1 flex flex-col justify-between">
     <div>
       <h3 class="text-base font-bold text-white group-hover:text-primary-400 transition leading-snug mb-2 line-clamp-2">
-        <a href={`/uslugi/${slug}`}>
+        <a href={url(`/uslugi/${slug}`)}>
           {title}
         </a>
       </h3>
@@ -67,7 +68,7 @@ const categoryLabels: Record<string, string> = {
       </div>
 
       <a 
-        href={`/uslugi/${slug}`} 
+        href={url(`/uslugi/${slug}`)} 
         class="w-full bg-slate-800 group-hover:bg-primary-600 text-slate-200 group-hover:text-slate-950 font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center space-x-2 transition duration-300"
       >
         <span>Подробнее об услуге</span>

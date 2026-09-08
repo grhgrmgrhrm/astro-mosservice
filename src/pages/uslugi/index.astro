@@ -4,6 +4,7 @@ import ServiceCard from '@/components/ServiceCard.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import { getCollection } from 'astro:content';
 import { siteConfig } from '@/data/siteConfig';
+import { url } from '@/utils/url';
 
 const allServices = await getCollection('services');
 
@@ -64,8 +65,8 @@ const categories = [
 
 <Layout 
   showContactWidget={true}
-  title="Все услуги по ремонту форсунок и ТНВД в Минске | МосСервис" 
-  description="Каталог услуг СТО МосСервис в Минске: ремонт дизельных форсунок Common Rail, чистка бензиновых форсунок, диагностика ТНВД, замена датчиков. Гарантия 12 месяцев."
+  title="Все услуги по ремонту форсунок и ТНВД в Минске | МАСервис" 
+  description="Каталог услуг СТО МАСервис в Минске: ремонт дизельных форсунок Common Rail, чистка бензиновых форсунок, диагностика ТНВД, замена датчиков. Гарантия 12 месяцев."
 >
   <div class="max-w-7xl mx-auto px-4 py-8">
     <Breadcrumbs items={[{ label: 'Услуги и цены' }]} />

@@ -9,7 +9,7 @@ const faqItems = [
   {
     category: 'common-rail',
     question: 'Какие признаки указывают на неисправность дизельных форсунок Common Rail?',
-    answer: 'Затрудненный запуск двигателя (особенно на холодную), повышенная дымность (черный или сизый выхлоп), плавающие обороты холостого хода, снижение тяги, стук при разгоне и повышенный расход дизельного топлива. При появлении этих симптомов рекомендуем записаться на диагностику в «МосСервис» по телефону ' + siteConfig.phonePrimary + '.'
+    answer: 'Затрудненный запуск двигателя (особенно на холодную), повышенная дымность (черный или сизый выхлоп), плавающие обороты холостого хода, снижение тяги, стук при разгоне и повышенный расход дизельного топлива. При появлении этих симптомов рекомендуем записаться на диагностику в «МАСервис» по телефону ' + siteConfig.phonePrimary + '.'
   },
   {
     category: 'common-rail',
@@ -56,7 +56,7 @@ const faqItems = [
   {
     category: 'tnvd',
     question: 'Обслуживаете ли вы коммерческий транспорт и микроавтобусы?',
-    answer: 'Да, СТО «МосСервис» специализируется на ремонте топливной аппаратуры микроавтобусов и легких грузовиков (Mercedes Sprinter, VW Crafter/Transporter, Ford Transit, Fiat Ducato, Peugeot Boxer).'
+    answer: 'Да, СТО «МАСервис» специализируется на ремонте топливной аппаратуры микроавтобусов и легких грузовиков (Mercedes Sprinter, VW Crafter/Transporter, Ford Transit, Fiat Ducato, Peugeot Boxer).'
   },
   {
     category: 'tnvd',
@@ -95,12 +95,12 @@ const faqItems = [
   {
     category: 'warranty',
     question: 'Какая гарантия предоставляется на отремонтированные форсунки и ТНВД?',
-    answer: 'На все выполненные работы и замененные оригинальные запчасти СТО «МосСервис» предоставляет гарантию 12 месяцев или 20 000 км пробега.'
+    answer: 'На все выполненные работы и замененные оригинальные запчасти СТО «МАСервис» предоставляет гарантию 12 месяцев или 20 000 км пробега.'
   },
   {
     category: 'warranty',
     question: 'Вы работаете с юридическими лицами по безналичному расчету?',
-    answer: 'Да, мы работаем с физическими лицами и организациями по безналичному расчету с выделением НДС ' + siteConfig.vatRate + '. Услуги оказывает ' + siteConfig.legalName + ' (УНП ' + siteConfig.unp + ', р/с ' + siteConfig.bankDetails.account + ' в ' + siteConfig.bankDetails.bankName + ').'
+    answer: 'Да, мы работаем с физическими лицами и организациями по безналичному расчету. Услуги оказывает ' + siteConfig.legalName + ' (УНП ' + siteConfig.unp + ', р/с ' + siteConfig.bankDetails.account + ' в ' + siteConfig.bankDetails.bankName + ').'
   },
   {
     category: 'warranty',
@@ -153,7 +153,7 @@ const categories = [
 
 <Layout 
   showContactWidget={true}
-  title="Вопросы и ответы (FAQ) по ремонту форсунок и ТНВД в Минске | МосСервис" 
+  title="Вопросы и ответы (FAQ) по ремонту форсунок и ТНВД в Минске | МАСервис" 
   description="Ответы на самые популярные вопросы по диагностике, стендовой проверке, кодированию и ремонту дизельных и бензиновых форсунок Common Rail в Минске. Гарантия 12 месяцев."
   faq={faqItems.map(item => ({ question: item.question, answer: item.answer }))}
 >
@@ -163,7 +163,7 @@ const categories = [
     <div class="mb-10 text-left">
       <div class="inline-flex items-center space-x-2 bg-primary-500/10 border border-primary-500/30 text-primary-400 text-xs font-semibold px-3.5 py-1.5 rounded-full mb-4 uppercase tracking-wider">
         <HelpCircle class="w-4 h-4 text-primary-500" />
-        <span>База знаний СТО МосСервис</span>
+        <span>База знаний СТО МАСервис</span>
       </div>
       <h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">
         Часто задаваемые вопросы и ответы (FAQ)

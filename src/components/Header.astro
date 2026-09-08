@@ -1,5 +1,6 @@
 ---
 import { siteConfig } from '@/data/siteConfig';
+import { url } from '@/utils/url';
 import { Phone, Clock, MapPin, Wrench, Menu, X } from 'lucide-astro';
 
 const pathname = Astro.url.pathname;
@@ -9,11 +10,11 @@ const isActive = (href: string) => {
 };
 
 const navLinks = [
-  { label: 'Главная', href: '/' },
-  { label: 'Все услуги', href: '/uslugi' },
-  { label: 'FAQ', href: '/faq' },
-  { label: 'О сервисе', href: '/o-nas' },
-  { label: 'Контакты', href: '/kontakty' },
+  { label: 'Главная', href: url('/') },
+  { label: 'Все услуги', href: url('/uslugi') },
+  { label: 'FAQ', href: url('/faq') },
+  { label: 'О сервисе', href: url('/o-nas') },
+  { label: 'Контакты', href: url('/kontakty') },
 ];
 ---
 
@@ -42,13 +43,13 @@ const navLinks = [
 <header class="bg-dark-900/95 backdrop-blur sticky top-0 z-50 border-b border-slate-800">
   <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
     <!-- Logo -->
-    <a href="/" class="flex items-center space-x-3 group">
+    <a href={url('/')} class="flex items-center space-x-3 group">
       <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-accent-600 flex items-center justify-center text-slate-950 font-bold shadow-lg shadow-primary-500/20 group-hover:scale-105 transition">
         <Wrench class="w-6 h-6 stroke-[2.5]" />
       </div>
       <div>
         <span class="text-xl font-extrabold tracking-tight text-white block leading-none">
-          МОС<span class="text-primary-500">СЕРВИС</span>
+          МА<span class="text-primary-500">СЕРВИС</span>
         </span>
         <span class="text-[10px] text-slate-400 font-medium uppercase tracking-wider block mt-0.5">
           Ремонт форсунок & ТНВД Минск
@@ -76,7 +77,7 @@ const navLinks = [
           <div class="text-[11px] text-emerald-400 font-medium">Без выходных</div>
         </div>
       </a>
-      <a href="/kontakty" class="hidden sm:inline-block bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-accent-500 text-slate-950 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider shadow-md shadow-primary-600/20 transition transform active:scale-95">
+      <a href={url('/kontakty')} class="hidden sm:inline-block bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-accent-500 text-slate-950 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider shadow-md shadow-primary-600/20 transition transform active:scale-95">
         Записаться
       </a>
 

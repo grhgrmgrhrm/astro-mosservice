@@ -4,6 +4,7 @@ import ServiceCard from '@/components/ServiceCard.astro';
 import ReviewsSlider from '@/components/ReviewsSlider.astro';
 import { getCollection } from 'astro:content';
 import { siteConfig } from '@/data/siteConfig';
+import { url } from '@/utils/url';
 import { Wrench, ShieldCheck, Cpu, Clock, CheckCircle2, Phone, MapPin, Award, ArrowRight } from 'lucide-astro';
 
 const allServices = await getCollection('services');
@@ -40,8 +41,8 @@ const faqList = [
   <!-- Hero Section -->
   <section class="relative bg-dark-950 overflow-hidden pt-12 pb-20 border-b border-slate-800">
     <img
-      src="/images/hero/hero-desktop.webp"
-      srcset="/images/hero/hero-mobile.webp 800w, /images/hero/hero-desktop.webp 1920w"
+      src={url('/images/hero/hero-desktop.webp')}
+      srcset={`${url('/images/hero/hero-mobile.webp')} 800w, ${url('/images/hero/hero-desktop.webp')} 1920w`}
       sizes="100vw"
       alt="Ремонт форсунок и ТНВД в Минске"
       width="1920"
@@ -82,7 +83,7 @@ const faqList = [
           </div>
           <div class="flex items-center space-x-2 bg-dark-900/80 p-3 rounded-xl border border-slate-800 col-span-2 sm:col-span-1">
             <Cpu class="w-4 h-4 text-primary-500 shrink-0" />
-            <span>Стенды EPS & Hartridge</span>
+            <span>Работаем с физлицами и юрлицами</span>
           </div>
         </div>
 
@@ -91,7 +92,7 @@ const faqList = [
           <a href={`tel:${siteConfig.phoneClean}`} class="bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-accent-500 text-slate-950 font-black px-6 py-4 rounded-xl text-sm uppercase tracking-wider text-center shadow-lg shadow-primary-600/30 transition transform hover:-translate-y-0.5">
             Записаться на диагностику
           </a>
-          <a href="/uslugi" class="bg-slate-800 hover:bg-slate-700 text-white font-bold px-6 py-4 rounded-xl text-sm text-center border border-slate-700 transition">
+          <a href={url('/uslugi')} class="bg-slate-800 hover:bg-slate-700 text-white font-bold px-6 py-4 rounded-xl text-sm text-center border border-slate-700 transition">
             Смотреть все услуги
           </a>
         </div>
@@ -125,7 +126,7 @@ const faqList = [
         </div>
 
         <div class="text-[11px] text-slate-500 text-center">
-          Работаем с физлицами и безналичным расчетом с НДС {siteConfig.vatRate} для юрлиц.
+          Работаем с физлицами и юрлицами.
         </div>
       </div>
     </div>
@@ -139,7 +140,7 @@ const faqList = [
           <span class="text-xs font-bold uppercase tracking-widest text-primary-500 block mb-2">Наши основные направления</span>
           <h2 class="text-2xl sm:text-4xl font-extrabold text-white">Ключевые услуги по ремонту топливной системы</h2>
         </div>
-        <a href="/uslugi" class="mt-4 md:mt-0 text-sm font-bold text-primary-400 hover:text-primary-300 flex items-center space-x-1">
+        <a href={url('/uslugi')} class="mt-4 md:mt-0 text-sm font-bold text-primary-400 hover:text-primary-300 flex items-center space-x-1">
           <span>Каталог всех 14 услуг</span>
           <ArrowRight class="w-4 h-4" />
         </a>
@@ -172,9 +173,9 @@ const faqList = [
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {brandList.map(brand => (
-          <a href={`/uslugi/${brand.slug}`} class="bg-dark-950 p-6 rounded-2xl border border-slate-800 hover:border-primary-500/50 transition group">
+          <a href={url(`/uslugi/${brand.slug}`)} class="bg-dark-950 p-6 rounded-2xl border border-slate-800 hover:border-primary-500/50 transition group">
             <div class="h-36 w-full rounded-xl bg-slate-900/90 border border-slate-800 p-3 flex items-center justify-center mb-4 group-hover:border-primary-500/50 transition">
-              <img src={brand.image} alt={brand.name} width="200" height="140" loading="lazy" class="w-full h-full object-contain filter brightness-110 group-hover:scale-105 transition duration-300" />
+              <img src={url(brand.image)} alt={brand.name} width="200" height="140" loading="lazy" class="w-full h-full object-contain filter brightness-110 group-hover:scale-105 transition duration-300" />
             </div>
             <h3 class="text-lg font-bold text-white group-hover:text-primary-400 transition mb-2">
               {brand.name}

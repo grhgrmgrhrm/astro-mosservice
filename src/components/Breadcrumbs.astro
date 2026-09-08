@@ -1,6 +1,7 @@
 ---
 import { ChevronRight, Home } from 'lucide-astro';
 import { siteConfig } from '@/data/siteConfig';
+import { url } from '@/utils/url';
 
 interface Item {
   label: string;
@@ -33,7 +34,7 @@ const breadcrumbSchema = {
 <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 
 <nav class="flex items-center space-x-2 text-xs text-slate-400 py-3 mb-6 overflow-x-auto">
-  <a href="/" class="flex items-center space-x-1 hover:text-primary-500 transition shrink-0">
+  <a href={url('/')} class="flex items-center space-x-1 hover:text-primary-500 transition shrink-0">
     <Home class="w-3.5 h-3.5" />
     <span>Главная</span>
   </a>

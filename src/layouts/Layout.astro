@@ -3,6 +3,7 @@ import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import SchemaOrg from '@/components/SchemaOrg.astro';
 import Analytics from '@/components/Analytics.astro';
+import { url } from '@/utils/url';
 import '@/styles/global.css';
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/500.css';
@@ -44,9 +45,9 @@ const canonicalUrl = slug ? `${siteConfig.url}/uslugi/${slug}` : siteConfig.url;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0b0f19" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/icons/apple-touch-icon-180.png" />
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <link rel="apple-touch-icon" href={url('/icons/apple-touch-icon-180.png')} />
+    <link rel="manifest" href={url('/manifest.json')} />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
@@ -56,8 +57,8 @@ const canonicalUrl = slug ? `${siteConfig.url}/uslugi/${slug}` : siteConfig.url;
       <link
         rel="preload"
         as="image"
-        href="/images/hero/hero-desktop.webp"
-        imagesrcset="/images/hero/hero-mobile.webp 800w, /images/hero/hero-desktop.webp 1920w"
+        href={url('/images/hero/hero-desktop.webp')}
+        imagesrcset={`${url('/images/hero/hero-mobile.webp')} 800w, ${url('/images/hero/hero-desktop.webp')} 1920w`}
         imagesizes="100vw"
         fetchpriority="high"
       />

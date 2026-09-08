@@ -4,6 +4,7 @@ import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import InternalLinks from '@/components/InternalLinks.astro';
 import { getCollection } from 'astro:content';
 import { siteConfig } from '@/data/siteConfig';
+import { url } from '@/utils/url';
 import { Clock, ShieldCheck, Phone, Check, Wrench, Tag } from 'lucide-astro';
 
 export async function getStaticPaths() {
@@ -19,11 +20,11 @@ const { Content } = await entry.render();
 const { title, metaTitle, description, image, priceFrom, executionTime, category, relatedServices } = entry.data;
 
 // Конвертируем путь к картинке в full-версию (800x500) для страницы услуги
-const fullImage = image.replace(/\.webp$/, '-full.webp');
+const fullImage = url(image.replace(/\.webp$/, '-full.webp'));
 ---
 
 <Layout 
-  title={metaTitle || `${title} в Минске | МосСервис`}
+  title={metaTitle || `${title} в Минске | МАСервис`}
   description={description}
   image={image}
   type="service"
@@ -95,7 +96,7 @@ const fullImage = image.replace(/\.webp$/, '-full.webp');
           </a>
 
           <div class="text-[11px] text-slate-500 text-center">
-            Ежедневно: 08:00 - 20:00. Минск, Передовая ул., 6, корп. 12
+            {siteConfig.workingHours}. {siteConfig.address.full}
           </div>
         </div>
       </aside>

@@ -1,8 +1,9 @@
 {
-  "name": "СТО МосСервис — Ремонт форсунок и ТНВД в Минске",
-  "short_name": "МосСервис",
+  "name": "СТО МАСервис — Ремонт форсунок и ТНВД в Минске",
+  "short_name": "МАСервис",
   "description": "Специализированный ремонт дизельных и бензиновых форсунок Common Rail, ТНВД и компьютерная диагностика в Минске. Гарантия 12 месяцев.",
-  "start_url": "/",
+  "start_url": "/astro-mosservice/",
+  "scope": "/astro-mosservice/",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#0b0f19",

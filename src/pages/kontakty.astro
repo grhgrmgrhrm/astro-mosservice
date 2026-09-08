@@ -5,15 +5,15 @@ import { siteConfig } from '@/data/siteConfig';
 import { MapPin, Phone, Mail, Clock, Navigation, Building2, CreditCard, FileText, CheckCircle2 } from 'lucide-astro';
 
 const mapWidgetUrl = `https://yandex.ru/map-widget/v1/?ll=${siteConfig.address.longitude}%2C${siteConfig.address.latitude}&z=16&pt=${siteConfig.address.longitude},${siteConfig.address.latitude},pm2rdm`;
-const metaDescription = `Контактная информация СТО МосСервис: телефоны, адрес в Минске (${siteConfig.address.street}), карта проезда, режим работы и реквизиты ${siteConfig.legalName}.`;
+const metaDescription = `Контактная информация СТО МАСервис: телефоны, адрес в Минске (${siteConfig.address.street}), карта проезда, режим работы и реквизиты ${siteConfig.legalName}.`;
 ---
 
-<Layout title="Контакты и реквизиты | СТО МосСервис в Минске" description={metaDescription}>
+<Layout title="Контакты и реквизиты | СТО МАСервис в Минске" description={metaDescription}>
   <div class="max-w-7xl mx-auto px-4 py-8">
     <Breadcrumbs items={[{ label: 'Контакты и реквизиты' }]} />
 
     <h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-8">
-      Контакты и реквизиты СТО МосСервис
+      Контакты и реквизиты СТО МАСервис
     </h1>
 
     <!-- Top Grid: Contacts & Map -->
@@ -75,7 +75,7 @@ const metaDescription = `Контактная информация СТО Мос
       <!-- Interactive Map Banner with Pin -->
       <div class="lg:col-span-7 bg-dark-900 rounded-3xl overflow-hidden border border-slate-800 min-h-[380px] relative shadow-xl">
         <iframe 
-          title="Схема проезда СТО МосСервис с пином"
+          title="Схема проезда СТО МАСервис с пином"
           src={mapWidgetUrl}
           class="w-full h-full min-h-[380px] border-0" 
           allowfullscreen="true"
@@ -129,7 +129,7 @@ const metaDescription = `Контактная информация СТО Мос
       <div class="mt-6 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
         <div class="flex items-center space-x-2">
           <CheckCircle2 class="w-4 h-4 text-emerald-400 shrink-0" />
-          <span>Выделяем НДС {siteConfig.vatRate} при безналичном расчете с организациями</span>
+          <span>Работаем с физическими лицами и организациями по безналичному расчету</span>
         </div>
         <a href={`mailto:${siteConfig.email}`} class="text-primary-400 hover:underline font-semibold">
           Запросить счет-фактуру: {siteConfig.email}

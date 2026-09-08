@@ -1,19 +1,20 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import { siteConfig } from '@/data/siteConfig';
+import { url } from '@/utils/url';
 import { Wrench, ArrowRight, Phone, Home } from 'lucide-astro';
 
 const popularServices = [
-  { label: 'Ремонт форсунок Common Rail', href: '/uslugi/remont-dizelnyh-forsunok-common-rail' },
-  { label: 'Ремонт ТНВД', href: '/uslugi/remont-tnvd' },
-  { label: 'Ремонт форсунок Bosch', href: '/uslugi/remont-forsunok-bosch' },
-  { label: 'Стендовая проверка форсунок', href: '/uslugi/stendovaya-proverka-forsunok' },
-  { label: 'Компьютерная диагностика', href: '/uslugi/kompyuternaya-diagnostika' },
+  { label: 'Ремонт форсунок Common Rail', href: url('/uslugi/remont-dizelnyh-forsunok-common-rail') },
+  { label: 'Ремонт ТНВД', href: url('/uslugi/remont-tnvd') },
+  { label: 'Ремонт форсунок Bosch', href: url('/uslugi/remont-forsunok-bosch') },
+  { label: 'Стендовая проверка форсунок', href: url('/uslugi/stendovaya-proverka-forsunok') },
+  { label: 'Компьютерная диагностика', href: url('/uslugi/kompyuternaya-diagnostika') },
 ];
 ---
 
 <Layout
-  title="Страница не найдена (404) | СТО МосСервис Минск"
+  title="Страница не найдена (404) | СТО МАСервис Минск"
   description="Запрашиваемая страница не найдена. Перейдите на главную или выберите услугу по ремонту форсунок и ТНВД в Минске."
 >
   <div class="max-w-3xl mx-auto px-4 py-20 text-center">
@@ -30,11 +31,11 @@ const popularServices = [
     </p>
 
     <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
-      <a href="/" class="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-accent-500 text-slate-950 font-bold px-6 py-3.5 rounded-xl text-xs uppercase tracking-wider transition">
+      <a href={url('/')} class="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-accent-500 text-slate-950 font-bold px-6 py-3.5 rounded-xl text-xs uppercase tracking-wider transition">
         <Home class="w-4 h-4" />
         <span>На главную</span>
       </a>
-      <a href="/uslugi" class="inline-flex items-center space-x-2 bg-slate-800 hover:bg-slate-700 text-white font-bold px-6 py-3.5 rounded-xl text-xs uppercase tracking-wider border border-slate-700 transition">
+      <a href={url('/uslugi')} class="inline-flex items-center space-x-2 bg-slate-800 hover:bg-slate-700 text-white font-bold px-6 py-3.5 rounded-xl text-xs uppercase tracking-wider border border-slate-700 transition">
         <span>Каталог услуг</span>
         <ArrowRight class="w-4 h-4" />
       </a>
