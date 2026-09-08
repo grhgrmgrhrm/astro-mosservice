@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mosservice.by/sitemap-index.xml
